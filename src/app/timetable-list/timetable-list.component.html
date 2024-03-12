@@ -1,12 +1,39 @@
-@for (appointment of appointments; track appointment.id){
-  <p>{{ appointment.id }}</p>
-  <p>{{ appointment.description }}</p>
-  <p>{{ appointment.date }}</p>
-}
-
-<div class="form-appointment">
-  <input [(ngModel)]="newAppointmentDescription" placeholder="Termin Beschreibung">
-  <input [(ngModel)]="newAppointmentDate" type="date" placeholder="Datum">
-  <button (click)="addAppointment()">Hinzufügen</button>
+<div class="container">
+  <div class="row">
+    <h1>Terminübersicht</h1>
+    <table class="table caption-top">
+      <thead>
+      <tr>
+        <th scope="col">Beschreibung</th>
+        <th scope="col">Datum</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (appointment of appointments; track appointment.id; let i = $index) {
+          <tr>
+            <td>{{ appointment.description }}</td>
+            <td>{{ appointment.date }}</td>
+            <td>
+              <button (click)="deleteAppointment(i)" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+      <tr>
+        <td><input [(ngModel)]="newAppointmentDescription" placeholder="Termin Beschreibung"></td>
+        <td><input [(ngModel)]="newAppointmentDate" type="date" placeholder="Datum"></td>
+        <td>
+          <button class="btn btn-primary" (click)="addAppointment()">Hinzufügen</button>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
+
+
+
+
 
